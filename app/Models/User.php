@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_name',
     ];
 
     /**
@@ -44,5 +45,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+     /**
+     * Get the user role.
+     *
+     * @return bool
+     */
+    public function isAdmin():bool{
+         return $this->role_name === 'admin';
     }
 }
