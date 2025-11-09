@@ -10,4 +10,10 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+
+    resolve: {
+        alias: {
+            '@web': '/resources/js/web/',
+        },
+    }
 });

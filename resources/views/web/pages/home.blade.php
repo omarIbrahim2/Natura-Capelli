@@ -7,98 +7,8 @@ home
 @section('content')
 
 <!-- Hero Section with Background -->
-<section class="relative min-h-screen">
-    <!-- Background Image with Overlay -->
-    <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-black/50 z-10"></div>
-        <img src="{{ asset('assets/images/headers/seascape-texture-waves-water-generative-ai.jpg') }}" 
-             alt="Header Background" 
-             class="w-full h-full object-cover">
-    </div>
+<x-header header_bg_image="assets/images/headers/seascape-texture-waves-water-generative-ai.jpg">
 
-    <!-- Navigation -->
-    <nav class="relative z-50 ">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-20">
-
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="{{ route('home') }}" class="inline-block">
-                        <img class="w-12 h-12 rounded-full object-cover" src="{{ asset('assets/images/logos/logo.jpg') }}" alt="logo">
-                    </a>
-                </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="{{ route('home') }}" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="{{ route('shop') }}" class="nav-link">Shop</a>
-                    <a href="#Routine" class="nav-link">Routine</a>
-                    <a href="{{ route('contact') }}" class="nav-link">Contact</a>
-                </div>
-
-                <!-- CTA Button -->
-                <div class="hidden  md:flex items-center space-x-10">
-                    <!-- Cart Icon with Badge -->
-                    <a href="#" class="icon">
-                        <i class="fas fa-shopping-bag text-2xl"></i>
-                        <!-- Dynamic Cart Count -->
-                        <span class="absolute -top-2 -right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-lg">
-                            {{ session('cart_count', 0) }}
-                        </span>
-                    </a>
-
-                    <!-- Language Selector -->
-                    <div class="relative">
-                        <select class="bg-white/5 backdrop-blur-md text-white border border-white/20 rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-orange-100 cursor-pointer appearance-none hover:bg-white/10 transition-all">
-                            <option value="en" class="bg-gray-900 text-white">English</option>
-                            <option value="ar" class="bg-gray-900 text-white">العربية</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center space-x-4">
-
-                    <a href="#" class="icon">
-                        <i class="fas fa-shopping-bag text-2xl"></i>
-                        <!-- Dynamic Cart Count -->
-                        <span class="absolute -top-2 -right-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-lg">
-                            {{ session('cart_count', 0) }}
-                        </span>
-                    </a>
-
-                <!-- Language Selector - Mobile -->
-              <div class="relative">
-                        <select class="bg-white/5 backdrop-blur-md text-white border border-white/20 rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-orange-100 cursor-pointer appearance-none hover:bg-white/10 transition-all">
-                            <option value="en" class="bg-gray-900 text-white">English</option>
-                            <option value="ar" class="bg-gray-900 text-white">العربية</option>
-                        </select>
-             </div>
-
-
-                    <button id="mobile-menu-button" class="text-white hover:text-orange-100 focus:outline-none cursor-pointer">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-footer backdrop-blur-md">
-            <div class="px-4 pt-2 pb-4 space-y-2 bg-footer">
-                <a href="#home" class="block nav-link">Home</a>
-                <a href="#about" class="block nav-link">About</a>
-                <a href="#Shop" class="block nav-link">Shop</a>
-                <a href="#Routine" class="block nav-link">Routine</a>
-                <a href="#contact" class="block nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Content -->
  <div class="relative z-40 container mx-auto px-4 flex items-center justify-center" style="height: calc(100vh - 5rem);">
     <div class="text-center space-y-8">
         <h1 class="text-white text-6xl md:text-7xl lg:text-8xl font-bold tracking-wider uppercase mx-4">
@@ -116,7 +26,7 @@ home
         </div>
     </div>
 </div>
-</section>
+</x-header>
 
 <!-- about us -->
 <section class="py-16 md:py-24 bg-black">
@@ -164,25 +74,25 @@ home
 
 <!-- products -->
 
-   <section class="py-16 md:py-24 bg-black">
+   <section class="py-16 md:py-24 bg-black" x-data="productCarousel()">
         <div class="container mx-auto px-4">
             <h2 class="text-center font-bold text-white text-4xl mb-2">Featured Products</h2>
             <p class="text-gray-400 text-center mb-12">Discover our Products</p>
 
             <div class="relative max-w-7xl mx-auto">
                 <!-- Left Arrow -->
-                <button onclick="scrollCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 shadow-lg p-4 rounded-full transition-all duration-300 hover:scale-110">
+                <button  @click="scroll(-1)" x-show="!isAtStart" x-transition class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 shadow-lg p-4 rounded-full transition-all duration-300 hover:scale-110">
                     <i class="fas fa-arrow-left text-xl text-gray-800"></i>
                 </button>
 
                 <!-- Right Arrow -->
-                <button onclick="scrollCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 shadow-lg p-4 rounded-full transition-all duration-300 hover:scale-110">
+                <button  @click="scroll(1)" x-show="!isAtEnd" x-transition class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-gray-100 shadow-lg p-4 rounded-full transition-all duration-300 hover:scale-110">
                     <i class="fas fa-arrow-right text-xl text-gray-800"></i>
                 </button>
 
                 <!-- Carousel Container -->
                 <div class="overflow-hidden px-12">
-                    <div id="carousel" class="carousel-container flex gap-6 overflow-x-auto py-4">
+                    <div  x-ref="carousel" @scroll="updateArrows()" class="carousel-container flex gap-6 overflow-x-auto py-4">
                         
                         <!-- Product Card 1 -->
                         <div class="product-card">
@@ -364,153 +274,5 @@ home
             </div>
         </div>
     </section>
-
-<!-- footer -->
-<footer class="bg-footer">
-    <!-- Main Footer Content -->
-    <div class="container mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row gap-8 justify-between items-center pb-6 border-b border-gray-700">
-            <!-- Logo -->
-            <img class="w-16 h-16 rounded-full object-cover shadow-lg" src="{{ asset('assets/images/logos/logo.jpg') }}" alt="logo">
-
-            <!-- Middle Section - Navigation -->
-            <div class="flex flex-col gap-3 items-center">
-                <h3 class="text-white font-bold text-xl tracking-wide">Natura Capelli</h3>
-                <div class="flex gap-6">
-                    <a href="#" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About</a>
-                    <a href="#" class="footer-link">Products</a>
-                    <a href="#" class="footer-link">Contact</a>
-                </div>
-            </div>
-
-            <!-- Social Media Icons -->
-            <div class="flex gap-4 items-center">
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/" class="icon" target="_blank">
-                    <i class="fab fa-facebook text-lg"></i>
-                </a>
-                
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/" class="icon" target="_blank">
-                    <i class="fab fa-instagram text-lg"></i>
-                </a>
-                
-                <!-- Phone -->
-                <a href="https://wa.me/+201148992811" target="_blank" class="icon">
-                    <i class="fab fa-whatsapp text-lg"></i>
-                </a>
-            </div>
-        </div>
-
-        <!-- Bottom Section - Copyright & Credits -->
-        <div class="pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-            <p class="text-gray-500">
-                Copyright © <span id="currentYear">2026</span> Natura Capelli. All rights reserved.
-            </p>
-            <p class="text-gray-500">
-                Developed by <a href="#" class="text-white font-semibold hover:text-gray-300 transition">Natura Capelli</a>
-            </p>
-        </div>
-    </div>
-</footer>
-
-
 @endsection
 
-@push('scripts_bottom')
-
-<script>
-        const carousel = document.getElementById('carousel');
-        const leftArrow = document.querySelector('button[onclick="scrollCarousel(-1)"]');
-        const rightArrow = document.querySelector('button[onclick="scrollCarousel(1)"]');
-
-        function scrollCarousel(direction) {
-            const scrollAmount = 320; // card width + gap
-            carousel.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-            
-            // Update arrow visibility after scroll
-            setTimeout(updateArrows, 300);
-        }
-
-        function updateArrows() {
-            const isAtStart = carousel.scrollLeft <= 0;
-            const isAtEnd = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
-            
-            // Hide/show left arrow
-            if (isAtStart) {
-                leftArrow.style.opacity = '0';
-                leftArrow.style.pointerEvents = 'none';
-            } else {
-                leftArrow.style.opacity = '1';
-                leftArrow.style.pointerEvents = 'auto';
-            }
-            
-            // Hide/show right arrow
-            if (isAtEnd) {
-                rightArrow.style.opacity = '0';
-                rightArrow.style.pointerEvents = 'none';
-            } else {
-                rightArrow.style.opacity = '1';
-                rightArrow.style.pointerEvents = 'auto';
-            }
-        }
-
-        // Check arrow visibility on scroll
-        carousel.addEventListener('scroll', updateArrows);
-
-        // Initial check on page load
-        window.addEventListener('load', updateArrows);
-        
-        // Update on window resize
-        window.addEventListener('resize', updateArrows);
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = mobileMenuButton.querySelector('svg');
-
-    mobileMenuButton.addEventListener('click', function() {
-        // Toggle menu visibility
-        mobileMenu.classList.toggle('hidden');
-        
-        // Toggle icon between hamburger and X
-        if (mobileMenu.classList.contains('hidden')) {
-            // Show hamburger icon
-            menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-        } else {
-            // Show X icon
-            menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-        }
-    });
-
-    // Close menu when clicking on a link
-    const mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            // Reset to hamburger icon
-            menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const isClickInsideMenu = mobileMenu.contains(event.target);
-        const isClickOnButton = mobileMenuButton.contains(event.target);
-        
-        if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.add('hidden');
-            // Reset to hamburger icon
-            menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-        }
-    });
-});
-    </script>
-    
-@endpush()

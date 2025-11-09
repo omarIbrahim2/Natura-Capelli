@@ -24,6 +24,8 @@
     </head>
     <body class="bg-black">
         @yield('content')
+
+        <x-footer></x-footer>
         @stack('scripts_bottom')
     </body>
 </html>
