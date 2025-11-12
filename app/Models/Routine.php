@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Astrotomic\Translatable\Contracts\Translatable;
@@ -9,7 +10,7 @@ use Astrotomic\Translatable\Translatable as AstrotomicTranslatable;
 
 class Routine extends Model implements Translatable
 {
-    use AstrotomicTranslatable; 
+    use AstrotomicTranslatable , HasProducts; 
 
     protected $guarded = ['id' , 'created_at' , 'updated_at'];
     public $translatedAttributes = ['title'];
