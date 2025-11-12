@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Routines\Schemas;
+namespace App\Filament\Resources\Categories\Schemas;
 
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Tabs;
@@ -8,13 +8,13 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Components\Tabs\Tab;
 
-class RoutineForm
+class CategoryForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                 Tabs::make('Translations')
+                     Tabs::make('Translations')
                  ->tabs([
                     Tab::make('English')
                     ->schema([
@@ -36,7 +36,7 @@ class RoutineForm
                  FileUpload::make('image')
                     ->image()
                     ->imageEditor()
-                    ->directory('routines')
+                    ->directory('categories')
                     ->visibility('public')
                     ->columnSpanFull(),
             ]);

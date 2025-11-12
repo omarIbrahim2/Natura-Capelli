@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Flaiment\Auth;
+namespace App\Filament\Auth;
 
 use Filament\Auth\Pages\Login;
 use Filament\Facades\Filament;

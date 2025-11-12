@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Routines\Pages;
+namespace App\Filament\Resources\Categories\Pages;
 
-use App\Filament\Resources\Routines\RoutineResource;
+use App\Filament\Resources\Categories\CategoryResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditRoutine extends EditRecord
+class EditCategory extends EditRecord
 {
-    protected static string $resource = RoutineResource::class;
+    protected static string $resource = CategoryResource::class;
+    
     protected array $translations = [];
     protected function getHeaderActions(): array
     {
@@ -17,7 +18,7 @@ class EditRoutine extends EditRecord
         ];
     }
 
-       protected function mutateFormDataBeforeFill(array $data): array
+           protected function mutateFormDataBeforeFill(array $data): array
     {
         // Load translations into form
         $data['en'] = $this->record->translate('en')?->toArray() ?? [];

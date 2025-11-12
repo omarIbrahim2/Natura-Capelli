@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\Routines\Tables;
+namespace App\Filament\Resources\Categories\Tables;
 
 use Filament\Tables\Table;
 use Filament\Actions\EditAction;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 
-class RoutinesTable
+class CategoriesTable
 {
     public static function configure(Table $table): Table
     {
